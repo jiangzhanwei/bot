@@ -41,7 +41,7 @@ def auto_commit():
         create_file_with_time()  # 创建文件并追加当前时间
         commit_to_git()  # 提交更改
         print(f"提交次数：{_ + 1}/{total_commits}")
-        time.sleep(60)  # 等待 1 分钟
+        time.sleep(10)  # 等待 1 分钟
 
 if __name__ == "__main__":
     auto_commit()
