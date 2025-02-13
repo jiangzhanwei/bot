@@ -36,8 +36,8 @@ def commit_to_git():
 
 def auto_commit():
     print(datetime.now().strftime('%Y-%m-%d'))
-    """每分钟生成一个文件并提交，随机提交1-8次"""
-    total_commits = random.randint(1, 8)  # 随机提交次数
+    """每分钟生成一个文件并提交，随机提交1-10次"""
+    total_commits = random.randint(1, 10)  # 随机提交次数
     for _ in range(total_commits):
         create_file_with_time()  # 创建文件并追加当前时间
         commit_to_git()  # 提交更改
