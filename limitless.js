@@ -78,8 +78,8 @@ f.onload = () => {
   // exit 异步函数
   async function exit() {
     await clickSequentially([
-      '.chakra-button.css-175qj44',
-      '.chakra-button.css-118b3za',
+      '.chakra-button.css-1609o6z',
+      '.chakra-button.css-15hv7xy',
       '.chakra-button.css-1ggc78d'
     ]);
   }
