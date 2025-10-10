@@ -42,45 +42,46 @@ document.body.appendChild(f);
 f.onload = () => {
   const doc = f.contentDocument;
 
-  // 极速点击函数，微延时保证事件队列处理
-  async function clickBtnFast(selector) {
-    const btn = document.querySelector(selector);
+  // 极速点击函数，支持选择索引
+  async function clickBtnFastByIndex(selector, index = 0) {
+    const btns = document.querySelectorAll(selector);
+    const btn = btns[index]; // index 从 0 开始
     if (!btn) return;
     btn.click();
-    await new Promise(r => setTimeout(r, 2)); // 微延时，让浏览器处理事件队列
+    await new Promise(r => setTimeout(r, 2)); // 微延时，保证事件队列处理
   }
 
-  // 顺序连续点击
-  async function clickSequentially(selectors) {
-    for (const sel of selectors) {
-      await clickBtnFast(sel);
+  // 顺序点击函数，支持 [selector, index] 数组
+  async function clickSequentially(selectorsWithIndex) {
+    for (const [sel, idx] of selectorsWithIndex) {
+      await clickBtnFastByIndex(sel, idx);
     }
   }
 
   // buy1 异步函数
   async function buy1() {
     await clickSequentially([
-      '.chakra-button.css-gw5zph',
-      '.chakra-button.css-118b3za',
-      '.chakra-button.css-1ggc78d'
+      ['.chakra-button.css-gw5zph', 0],
+      ['.chakra-button.css-118b3za', 0],
+      ['.chakra-button.css-1ggc78d', 0]
     ]);
   }
 
   // sell1 异步函数
   async function sell1() {
     await clickSequentially([
-      '.chakra-button.css-175qj44',
-      '.chakra-button.css-118b3za',
-      '.chakra-button.css-1ggc78d'
+      ['.chakra-button.css-175qj44', 0],
+      ['.chakra-button.css-118b3za', 0],
+      ['.chakra-button.css-1ggc78d', 0]
     ]);
   }
 
-  // exit 异步函数
+  // exit 异步函数（第二个按钮点击第四个）
   async function exit() {
     await clickSequentially([
-      '.chakra-button.css-1609o6z',
-      '.chakra-button.css-15hv7xy',
-      '.chakra-button.css-1ggc78d'
+      ['.chakra-button.css-1609o6z', 0],   // 第一个匹配
+      ['.chakra-button.css-15hv7xy', 3],   // 第四个匹配
+      ['.chakra-button.css-1ggc78d', 0]    // 第一个匹配
     ]);
   }
 
